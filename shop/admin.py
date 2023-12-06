@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Orders, Products, Sellers
+from .models import Category, Order, Product, Seller
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -10,28 +10,28 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ["name"]
 
 
-class ProductsAdmin(admin.ModelAdmin):
-    list_display = ["id", "name"]
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ["id", "name", "price", "salesman"]
     list_display_links = ["id", "name"]
     list_filter = ["name", "price", "brand"]
     search_fields = ["name", "price", "brand", "category"]
 
 
-class SellersAdmin(admin.ModelAdmin):
+class SellerAdmin(admin.ModelAdmin):
     list_display = ["id", "name", "phone"]
     list_display_links = ["id", "name"]
     list_filter = ["name", "phone"]
     search_fields = ["name"]
 
 
-class OrdersAdmin(admin.ModelAdmin):
+class OrderAdmin(admin.ModelAdmin):
     list_display = ["id", "owner"]
     list_display_links = ["id", "owner"]
     list_filter = ["owner", "date"]
     search_fields = ["owner", "date"]
 
 
-admin.site.register(Products, ProductsAdmin)
+admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Sellers, SellersAdmin)
-admin.site.register(Orders, OrdersAdmin)
+admin.site.register(Seller, SellerAdmin)
+admin.site.register(Order, OrderAdmin)
