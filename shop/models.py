@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+DEFAULT_IMAGE = "assets/no-image.png"
+UPLOAD_PATH = "assets/upload/"
 User = get_user_model()
 
 
@@ -36,7 +38,9 @@ class Seller(Person):
 class Product(models.Model):
     title = models.CharField(max_length=150)
     brand = models.CharField(max_length=150)
-    # Images = models.ImageField(blank=True,null=True)
+    Images = models.ImageField(
+        default=DEFAULT_IMAGE, upload_to=UPLOAD_PATH, blank=True, null=True
+    )
     stock = models.PositiveIntegerField(default=0)
     price = models.PositiveBigIntegerField()
     category = models.ManyToManyField(Category)
