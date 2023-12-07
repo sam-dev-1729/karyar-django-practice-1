@@ -36,6 +36,7 @@ class Seller(Person):
 class Product(models.Model):
     title = models.CharField(max_length=150)
     brand = models.CharField(max_length=150)
+    # Images = models.ImageField(blank=True,null=True)
     stock = models.PositiveIntegerField(default=0)
     price = models.PositiveBigIntegerField()
     category = models.ManyToManyField(Category)
@@ -63,7 +64,9 @@ class Order(models.Model):
         ("Cancelled", "Cancelled"),
     ]
     owner = models.OneToOneField(Customer, on_delete=models.CASCADE)
-    order_status = models.CharField(max_length=15, default="Pending")
+    order_status = models.CharField(
+        max_length=15, choices=ORDER_STATUS_CHOICES, default="Pending"
+    )
     products = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     cost = models.PositiveBigIntegerField()
